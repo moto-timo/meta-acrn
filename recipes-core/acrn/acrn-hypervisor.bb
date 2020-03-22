@@ -4,11 +4,11 @@ ACRN_BOARD ?= "nuc7i7dnb"
 ACRN_FIRMWARE ?= "uefi"
 ACRN_SCENARIO  ?= "sdc"
 
-EXTRA_OEMAKE += "HV_OBJDIR=${B}/hypervisor EFI_OBJDIR=${B}/efi-stub"
+EXTRA_OEMAKE += "T=${S} HV_OBJDIR=${B}/hypervisor EFI_OBJDIR=${B}/efi-stub"
 EXTRA_OEMAKE += "BOARD=${ACRN_BOARD} FIRMWARE=${ACRN_FIRMWARE} SCENARIO=${ACRN_SCENARIO}"
 EXTRA_OEMAKE += "BOARD_FILE=${S}/misc/acrn-config/xmls/board-xmls/${ACRN_BOARD}.xml SCENARIO_FILE=${S}/misc/acrn-config/xmls/config-xmls/${ACRN_BOARD}/${ACRN_SCENARIO}.xml"
 
-inherit python3native deploy
+inherit python3native deploy cml1
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -19,8 +19,18 @@ DEPENDS += "${@'gnu-efi' if d.getVar('ACRN_FIRMWARE') == 'uefi' else ''}"
 #    | .config does not exist and no defconfig available for BOARD...
 PARALLEL_MAKE = ""
 
+do_configure() {
+	cat <<-EOF >> ${S}/hypervisor/arch/x86/configs/${ACRN_BOARD}.config
+CONFIG_$(echo ${ACRN_SCENARIO} | tr '[:lower:]' '[:upper:]')=y
+CONFIG_UEFI_OS_LOADER_NAME="\\\\EFI\\\\BOOT\\\\bootx64.efi"
+EOF
+	cat ${S}/hypervisor/arch/x86/configs/${ACRN_BOARD}.config
+}
+
+do_menuconfig[dirs] = "${S}/hypervisor"
+
 do_compile() {
-	oe_runmake -C hypervisor
+	oe_runmake hypervisor
 	if [ "${ACRN_FIRMWARE}" = "uefi" ]; then
 		oe_runmake -C misc/efi-stub
 	fi
