@@ -19,10 +19,10 @@ do_configure() {
 	cat <<-EOF >> ${S}/hypervisor/arch/x86/configs/${ACRN_BOARD}.config
 CONFIG_$(echo ${ACRN_SCENARIO} | tr '[:lower:]' '[:upper:]')=y
 CONFIG_UEFI_OS_LOADER_NAME="\\\\EFI\\\\BOOT\\\\bootx64.efi"
+CONFIG_BOARD="${ACRN_BOARD}"
 EOF
 	cat ${S}/hypervisor/arch/x86/configs/${ACRN_BOARD}.config
 }
-
 
 do_compile() {
 	oe_runmake -C hypervisor
