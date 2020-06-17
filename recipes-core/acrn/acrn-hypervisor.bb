@@ -10,6 +10,9 @@ EXTRA_OEMAKE += "BOARD_FILE=${S}/misc/acrn-config/xmls/board-xmls/${ACRN_BOARD}.
 
 inherit python3native deploy
 
+inherit acrn-uefi-sign
+addtask acrn_uefi_sign after do_install before do_deploy
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS += "python3-kconfiglib-native"
