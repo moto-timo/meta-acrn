@@ -3,6 +3,7 @@ DISTRO_NAME = "ACRN Demo"
 DISTRO_VERSION = "3.1+snapshot-${DATE}"
 
 DISTRO_FEATURES = "${DISTRO_FEATURES_DEFAULT} \
+		   ${DISTRO_EXTRA_FEATURES} \
                    systemd efi largefile opengl ptest multiarch \
                    wayland vulkan pulseaudio bluez5 gobject-introspection-data"
 
