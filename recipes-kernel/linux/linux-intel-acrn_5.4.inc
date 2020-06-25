@@ -20,3 +20,8 @@ KERNEL_FEATURES_append = "features/netfilter/netfilter.scc \
                           cfg/hv-guest.scc \
                           cfg/paravirt_kvm.scc \
 "
+
+# Kernel config 'CONFIG_GPIO_LYNXPOINT' goes by a different name 'CONFIG_PINCTRL_LYNXPOINT' in
+# linux-intel 5.4 specifically. This causes a warning during kernel config audit. So suppress the
+# harmless warning for now.
+KCONF_BSP_AUDIT_LEVEL = "0"
