@@ -1,4 +1,4 @@
-IMAGE_FSTYPES += "ext4 wic.acrn"
+IMAGE_FSTYPES += "ext4 wic.acrn wic.acrn.bmap"
 
 # Conversion command to inject acrn.efi.  TODO should be done by wic directly.
 
