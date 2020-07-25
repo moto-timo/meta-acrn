@@ -31,6 +31,7 @@ python () {
         data = f.read()
     hash = hashlib.sha256(data).hexdigest()
     d.setVar('ACRN_DMVERITY_PRIVATE_KEY_HASH', hash)
+    bb.debug(4, 'ACRN_DMVERITY_PRIVATE_KEY_HASH = %s' % d.getVar('ACRN_DMVERITY_PRIVATE_KEY_HASH'))
 
     # Must reparse and thus rehash on file changes.
     bb.parse.mark_dependency(d, privkey)
