@@ -53,7 +53,7 @@ class DMVerityPlugin(SourcePlugin):
             raise WicError("%s shell pattern does not match exactly one rootfs image (missing --label parameter?): %s" % (pattern, rootfs))
         else:
             rootfs = rootfs[0]
-        logger.debug("Calculating dm-verity hash for rootfs %s (native %s)." % (rootfs, native_sysroot))
+        logger.debug(4, "Calculating dm-verity hash for rootfs %s (native %s)." % (rootfs, native_sysroot))
 
         hashimg = '%s/dm-verity_%s.img' % (cr_workdir, part.label)
         # Reserve some fixed amount of space at the start of the hash image
