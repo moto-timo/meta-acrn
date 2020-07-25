@@ -6,4 +6,4 @@ LINUX_VERSION_EXTENSION = "-linux-intel-acrn-sos"
 
 SUMMARY = "Linux Kernel with ACRN enabled (SOS)"
 
-KERNEL_FEATURES_append = " sos_5.4.scc "
+KERNEL_FEATURES_append = " sos_5.4.scc features/debug/dm-debug.scc"
