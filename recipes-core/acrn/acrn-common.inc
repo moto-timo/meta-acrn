@@ -7,7 +7,9 @@ SRC_URI = "git://github.com/projectacrn/acrn-hypervisor.git;branch=release_1.6 \
            file://paths.patch \
            file://hv-lapic-minor-refine-about-init_lapic.patch \
            file://gcc-10-disable-array-bounds-warning-for-now.patch \
-"
+           file://0001-board-xmls-nuc7i7dnb.xml-add-sdb3-fix-ttyS1.patch \
+           file://0002-config-xmls-nuc7i7dnb-sdc.xml-set-verbose-logs.patch \
+           "
 
 # Snapshot tags are of the format:
 # acrn-<year>w<week>.<day>-<timestamp><pass|fail>

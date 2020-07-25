@@ -1,0 +1,36 @@
+From c71ffda3e0b97e43a127fd9a82f016fa4b8cbec0 Mon Sep 17 00:00:00 2001
+From: Tim Orling <ticotimo@gmail.com>
+Date: Thu, 23 Jul 2020 11:17:15 -0700
+Subject: [PATCH] board-xmls/nuc7i7dnb.xml: add sdb3; fix ttyS1
+
+We commonly use USB flash drives for development, but if an
+internal disk is available, the internal device will likely
+be /dev/sda3 and the USB drive will be /dev/sdb3.
+
+The 0xf0a0 serial controller enumerates as /dev/ttyS1, not /dev/ttyS4.
+
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
+---
+ misc/acrn-config/xmls/board-xmls/nuc7i7dnb.xml | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/misc/acrn-config/xmls/board-xmls/nuc7i7dnb.xml b/misc/acrn-config/xmls/board-xmls/nuc7i7dnb.xml
+index 9f0a99cc..51765f8b 100644
+--- a/misc/acrn-config/xmls/board-xmls/nuc7i7dnb.xml
++++ b/misc/acrn-config/xmls/board-xmls/nuc7i7dnb.xml
+@@ -292,13 +292,14 @@
+ 
+ 	<BLOCK_DEVICE_INFO>
+ 	/dev/sda3: TYPE="ext4"
++	/dev/sdb3: TYPE="ext4"
+ 	/dev/nvme0n1p3: TYPE="ext4"
+ 	/dev/nvme0n1p4: TYPE="ext4"
+ 	</BLOCK_DEVICE_INFO>
+ 
+ 	<TTYS_INFO>
+ 	seri:/dev/ttyS0 type:portio base:0x3F8 irq:4
+-	seri:/dev/ttyS4 type:portio base:0xF0A0 irq:19
++	seri:/dev/ttyS1 type:portio base:0xF0A0 irq:19
+ 	</TTYS_INFO>
+ 
+ 	<AVAILABLE_IRQ_INFO>
