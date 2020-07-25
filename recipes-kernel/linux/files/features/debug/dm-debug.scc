@@ -1,0 +1,4 @@
+define KFEATURE_DESCRIPTION "Add kernel debug features for device-mapper"
+define KFEATURE_COMPATIBILITY board
+
+kconf non-hardware dm-debug.cfg
