@@ -17,7 +17,13 @@ CORE_IMAGE_EXTRA_INSTALL_remove = "acrn-efi-setup"
 
 inherit image-acrn
 
+IMAGE_CLASSES_append = " \
+   ${@ bb.utils.contains('DISTRO_FEATURES', 'secureboot', 'uefi-comboapp', '', d)} \
+"
+
 INITRD_IMAGE_intel-corei7-64 = "acrn-initramfs"
+# Skylake currently fails to build read-only-rootfs so dm-verity is not available
+INITRD_IMAGE_intel-skylake-64 = "acrn-initramfs"
 
 # Set in DISTRO_EXTRA_FEATURES_SOS or DISTRO_EXTRA_FEATURES_UOS as appropriate
 IMAGE_FEATURES_append = " \
