@@ -17,7 +17,7 @@ if [ -d /dev/disk/by-partlabel/msdos ]; then
     # standard partitions
     msdos=$(ls -la /dev/disk/by-partlabel/msdos)
     platform=$(ls -la /dev/disk/by-partlabel/platform)
-else if [ -d /dev/disk/by-partlabel/primary_uefi ]; then
+elif [ -d /dev/disk/by-partlabel/primary_uefi ]; then
 # acrn-image-verified-boot partitions 
     primary_uefi=$(ls -la /dev/disk/by-partlabel/primary_uefi)
     secondary_uefi=$(ls -la /dev/disk/by-partlabel/secondary_uefi)
